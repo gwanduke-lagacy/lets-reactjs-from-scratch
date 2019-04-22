@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
