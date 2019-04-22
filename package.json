@@ -24,6 +24,7 @@
     "react-hot-loader": "^4.8.4"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development"
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack"
   }
 }
