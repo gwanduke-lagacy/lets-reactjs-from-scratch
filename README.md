@@ -2,19 +2,19 @@
 
 다음 스택을 사용하는 간단한 Todo App.
 
-- ReactJS
+- [x] ReactJS
 - redux
 - redux-saga
 
 - 스타일링
   - Material-UI
-  - Sass
+  - [x] Sass
 
 - 개발환경
   - TypeScript
-  - prettier (포맷팅)
-  - webpack
-  - babel
+  - [x] prettier (포맷팅)
+  - [x] webpack
+  - [x] babel
 
 - 테스트
   - Jest/Enzyme (unit/integration test)
