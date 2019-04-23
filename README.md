@@ -17,7 +17,7 @@
   - [x] babel
 
 - 테스트
-  - Jest/Enzyme (unit/integration test)
+  - [x] Jest/Enzyme (unit/integration test)
   - Nightwatch (e2e)
   - CircleCI
 
