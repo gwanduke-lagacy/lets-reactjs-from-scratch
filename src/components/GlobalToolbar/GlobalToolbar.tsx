@@ -1,9 +1,12 @@
 import { AppBar, IconButton, Toolbar } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
-const GlobalToolbar = ({ onClickToggler }) => {
+interface IProps {
+  onClickToggler(): void;
+}
+
+const GlobalToolbar: React.FunctionComponent<IProps> = ({ onClickToggler }) => {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -14,10 +17,6 @@ const GlobalToolbar = ({ onClickToggler }) => {
       </Toolbar>
     </AppBar>
   );
-};
-
-GlobalToolbar.propTypes = {
-  onClickToggler: PropTypes.func
 };
 
 export default GlobalToolbar;

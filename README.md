@@ -11,7 +11,7 @@
   - [x] Sass
 
 - 개발환경
-  - TypeScript
+  - [x] TypeScript
   - [x] prettier (포맷팅)
   - [x] webpack
   - [x] babel

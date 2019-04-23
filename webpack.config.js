@@ -3,11 +3,16 @@ const webpack = require('webpack');
 
 module.exports = {
   // 어플리케이션의 엔트리 포인트. 여기서부터 번들링을 시작한다.
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   mode: 'development',
   // 어떻게 JavaScript 모듈들이 변형되는지 명시한다. rules 안의 규칙에 따른다.
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      },
       // ES6, JSX 구문 transform에 대한 규칙
       {
         test: /\.(js|jsx)$/,
@@ -36,7 +41,7 @@ module.exports = {
   // Webpack이 어떤 확장자를 resolve할지 지정.
   // 이는 모듈 import시 확장자 생략을 가능하게 해준다.
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx']
   },
   // 최종적으로 번들링된 파일을 어디에 위치 시킬지 지정
   output: {
