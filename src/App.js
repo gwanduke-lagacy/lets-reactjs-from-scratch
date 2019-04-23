@@ -39,7 +39,7 @@ class App extends Component {
           <TodoInput
             value={inputText}
             onChange={this.onChangeInputText}
-            onSubmit={this.onAddTodo}
+            onSubmit={this.onCreateTodo}
           />
           {todos.map(todo => (
             <TodoItem
@@ -47,7 +47,7 @@ class App extends Component {
               text={todo.body}
               completed={todo.completed}
               onToggleComplete={() => this.onToggleComplete(todo.id)}
-              onClickRemove={() => this.onRemoveTodo(todo.id)}
+              onClickRemove={() => this.onDeleteTodo(todo.id)}
             />
           ))}
         </List>
@@ -55,19 +55,70 @@ class App extends Component {
     );
   }
 
-  onToggleComplete = todoId => {
-    // TODO: 투두 토글러 구현
-    console.log('onToggleComplete');
+  onToggleComplete = async todoId => {
+    const { todos } = this.state;
+
+    const todo = this._findTodoById(todoId);
+    if (!todo) {
+      return;
+    }
+
+    const res = await axios.put(`/todos/${todo.id}`, {
+      completed: !todo.completed
+    });
+    const newTodo = res.data;
+
+    this.setState({
+      todos: todos.map(todo => {
+        return todo.id === todoId ? newTodo : todo;
+      })
+    });
   };
 
-  onAddTodo = () => {
-    // TODO: 투두 추가 기능 구현
-    console.log('onAddTodo');
+  onAddTodo = todo => {
+    const { todos } = this.state;
+
+    this.setState({
+      todos: [...todos, todo]
+    });
+  };
+
+  onCreateTodo = async () => {
+    const { inputText } = this.state;
+
+    if (!inputText) {
+      return;
+    }
+
+    const res = await axios.post('/todos', {
+      body: inputText
+    });
+    const todo = res.data;
+
+    this.setState({
+      inputText: ''
+    });
+
+    this.onAddTodo(todo);
   };
 
   onRemoveTodo = todoId => {
-    // TODO: 투두 삭제 기능 구현
-    console.log('onRemoveTodo', todoId);
+    const { todos } = this.state;
+
+    this.setState({
+      todos: todos.filter(todo => todo.id !== todoId)
+    });
+  };
+
+  onDeleteTodo = async todoId => {
+    const todo = this._findTodoById(todoId);
+    if (!todo) {
+      return;
+    }
+
+    const res = await axios.delete(`/todos/${todo.id}`);
+    const newTodo = res.data;
+    this.onRemoveTodo(newTodo.id);
   };
 
   onChangeInputText = e => {
@@ -82,6 +133,13 @@ class App extends Component {
     this.setState({
       drawerOpened: !drawerOpened
     });
+  };
+
+  _findTodoById = todoId => {
+    const { todos } = this.state;
+    return todos.filter(todo => {
+      return todo.id === todoId;
+    })[0];
   };
 }
 
