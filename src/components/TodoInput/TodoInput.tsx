@@ -2,10 +2,19 @@ import './TodoInput.scss';
 
 import { IconButton, InputBase, Paper } from '@material-ui/core';
 import { AddCircle as AddCircleIcon } from '@material-ui/icons';
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
-const TodoInput = ({ value, onChange, onSubmit }) => {
+interface IProps {
+  value: string;
+  onChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void;
+  onSubmit(): void;
+}
+
+const TodoInput: React.FunctionComponent<IProps> = ({
+  value,
+  onChange,
+  onSubmit
+}) => {
   return (
     <form
       className="TodoInput"
@@ -27,11 +36,6 @@ const TodoInput = ({ value, onChange, onSubmit }) => {
       </Paper>
     </form>
   );
-};
-
-TodoInput.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func
 };
 
 export default TodoInput;

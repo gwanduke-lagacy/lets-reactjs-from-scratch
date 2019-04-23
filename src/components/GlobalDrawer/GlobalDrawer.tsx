@@ -1,9 +1,16 @@
 import { List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer } from '@material-ui/core';
 import { Home as HomeIcon } from '@material-ui/icons';
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
-const GlobalDrawer = ({ opened, onToggle }) => {
+interface IProps {
+  opened: boolean;
+  onToggle(): void;
+}
+
+const GlobalDrawer: React.FunctionComponent<IProps> = ({
+  opened,
+  onToggle
+}) => {
   return (
     <SwipeableDrawer
       className="GlobalDrawer"
@@ -29,11 +36,6 @@ const GlobalDrawer = ({ opened, onToggle }) => {
       </div>
     </SwipeableDrawer>
   );
-};
-
-GlobalDrawer.propTypes = {
-  opened: PropTypes.bool,
-  onToggle: PropTypes.func
 };
 
 export default GlobalDrawer;

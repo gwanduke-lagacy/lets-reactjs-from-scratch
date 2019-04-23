@@ -1,11 +1,22 @@
 import { Checkbox, IconButton, ListItem, ListItemSecondaryAction, ListItemText, Tooltip } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
-const TodoItem = ({ text, completed, onToggleComplete, onClickRemove }) => {
+interface IProps {
+  text: string;
+  completed: boolean;
+  onToggleComplete(): void;
+  onClickRemove(): void;
+}
+
+const TodoItem: React.FunctionComponent<IProps> = ({
+  text,
+  completed,
+  onToggleComplete,
+  onClickRemove
+}) => {
   return (
-    <ListItem className="TodoItem" button>
+    <ListItem className="TodoItem" button={true}>
       <Checkbox tabIndex={-1} checked={completed} onChange={onToggleComplete} />
       <ListItemText primary={text} />
       <ListItemSecondaryAction>
@@ -17,13 +28,6 @@ const TodoItem = ({ text, completed, onToggleComplete, onClickRemove }) => {
       </ListItemSecondaryAction>
     </ListItem>
   );
-};
-
-TodoItem.propTypes = {
-  text: PropTypes.string,
-  completed: PropTypes.bool,
-  onToggleComplete: PropTypes.func,
-  onClickRemove: PropTypes.func
 };
 
 export default TodoItem;

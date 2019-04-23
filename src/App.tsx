@@ -1,7 +1,7 @@
 import './App.scss';
 
 import { List } from '@material-ui/core';
-import React, { Component } from 'react';
+import * as React from 'react';
 import { hot } from 'react-hot-loader';
 
 import { axios } from './api';
@@ -10,12 +10,29 @@ import GlobalToolbar from './components/GlobalToolbar/GlobalToolbar';
 import TodoInput from './components/TodoInput/TodoInput';
 import TodoItem from './components/TodoItem/TodoItem';
 
-class App extends Component {
-  state = {
-    drawerOpened: false,
-    inputText: '',
-    todos: []
-  };
+interface ITodo {
+  body: string;
+  id: string;
+  createdAt: string;
+  completed: boolean;
+}
+
+interface IProps {}
+interface IState {
+  drawerOpened: boolean;
+  inputText: string;
+  todos: ITodo[];
+}
+
+class App extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      drawerOpened: false,
+      inputText: '',
+      todos: []
+    };
+  }
 
   async componentDidMount() {
     const res = await axios({
@@ -75,7 +92,7 @@ class App extends Component {
     });
   };
 
-  onAddTodo = todo => {
+  onAddTodo = (todo: ITodo) => {
     const { todos } = this.state;
 
     this.setState({
@@ -102,7 +119,7 @@ class App extends Component {
     this.onAddTodo(todo);
   };
 
-  onRemoveTodo = todoId => {
+  onRemoveTodo = (todoId: string) => {
     const { todos } = this.state;
 
     this.setState({
@@ -110,7 +127,7 @@ class App extends Component {
     });
   };
 
-  onDeleteTodo = async todoId => {
+  onDeleteTodo = async (todoId: string) => {
     const todo = this._findTodoById(todoId);
     if (!todo) {
       return;
@@ -121,7 +138,9 @@ class App extends Component {
     this.onRemoveTodo(newTodo.id);
   };
 
-  onChangeInputText = e => {
+  onChangeInputText = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     this.setState({
       inputText: e.target.value
     });
@@ -135,7 +154,7 @@ class App extends Component {
     });
   };
 
-  _findTodoById = todoId => {
+  _findTodoById = (todoId: string): ITodo => {
     const { todos } = this.state;
     return todos.filter(todo => {
       return todo.id === todoId;
