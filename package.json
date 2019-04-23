@@ -11,16 +11,27 @@
     "@babel/core": "7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-transform-runtime": "^7.4.3",
-    "@babel/preset-env": "7.1.0",
-    "@babel/preset-react": "7.0.0",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "@types/enzyme": "^3.9.1",
+    "@types/jest": "^24.0.11",
     "@types/node": "^11.13.7",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
+    "babel-jest": "^24.7.1",
     "babel-loader": "8.0.2",
     "css-loader": "1.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.3.5",
+    "jest": "^24.7.1",
     "node-sass": "^4.11.0",
+    "react-hot-loader": "^4.8.4",
+    "react-test-renderer": "^16.8.6",
+    "react-testing-library": "^6.1.2",
     "sass-loader": "^7.1.0",
     "style-loader": "0.23.0",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^5.4.3",
     "tslint": "^5.16.0",
     "tslint-react": "^4.0.0",
@@ -34,11 +45,13 @@
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.8.4"
+    "react-dom": "^16.8.6"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   }
 }
