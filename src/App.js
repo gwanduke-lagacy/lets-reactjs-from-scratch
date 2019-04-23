@@ -1,19 +1,76 @@
 import './App.scss';
 
+import { List } from '@material-ui/core';
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 
+import GlobalDrawer from './components/GlobalDrawer/GlobalDrawer';
+import GlobalToolbar from './components/GlobalToolbar/GlobalToolbar';
+import TodoInput from './components/TodoInput/TodoInput';
+import TodoItem from './components/TodoItem/TodoItem';
+import { todos } from './fakeData';
+
 class App extends Component {
+  state = {
+    drawerOpened: false,
+    inputText: ''
+  };
+
   render() {
+    const { drawerOpened, inputText } = this.state;
+
     return (
       <div className="App">
-        <h1>Let's ReactJS From Scratch</h1>
-        <ul>
-          <li>🔥 Hot Module Reloading...</li>
-        </ul>
+        <GlobalToolbar onClickToggler={this.onToggleDrawer} />
+        <GlobalDrawer opened={drawerOpened} onToggle={this.onToggleDrawer} />
+        <List>
+          <TodoInput
+            value={inputText}
+            onChange={this.onChangeInputText}
+            onSubmit={this.onAddTodo}
+          />
+          {todos.map(todo => (
+            <TodoItem
+              key={todo.id}
+              text={todo.body}
+              completed={todo.completed}
+              onToggleComplete={() => this.onToggleComplete(todo.id)}
+              onClickRemove={() => this.onRemoveTodo(todo.id)}
+            />
+          ))}
+        </List>
       </div>
     );
   }
+
+  onToggleComplete = todoId => {
+    // TODO: 투두 토글러 구현
+    console.log('onToggleComplete');
+  };
+
+  onAddTodo = () => {
+    // TODO: 투두 추가 기능 구현
+    console.log('onAddTodo');
+  };
+
+  onRemoveTodo = todoId => {
+    // TODO: 투두 삭제 기능 구현
+    console.log('onRemoveTodo', todoId);
+  };
+
+  onChangeInputText = e => {
+    this.setState({
+      inputText: e.target.value
+    });
+  };
+
+  onToggleDrawer = () => {
+    const { drawerOpened } = this.state;
+
+    this.setState({
+      drawerOpened: !drawerOpened
+    });
+  };
 }
 
 export default hot(module)(App);

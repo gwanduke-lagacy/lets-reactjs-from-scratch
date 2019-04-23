@@ -7,7 +7,7 @@
 - redux-saga
 
 - 스타일링
-  - Material-UI
+  - [x] Material-UI
   - [x] Sass
 
 - 개발환경
