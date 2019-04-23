@@ -58,7 +58,7 @@ class App extends React.Component<IProps, IState> {
             onChange={this.onChangeInputText}
             onSubmit={this.onCreateTodo}
           />
-          {todos.map(todo => (
+          {todos.map((todo: ITodo) => (
             <TodoItem
               key={todo.id}
               text={todo.body}
@@ -72,10 +72,10 @@ class App extends React.Component<IProps, IState> {
     );
   }
 
-  onToggleComplete = async todoId => {
+  onToggleComplete = async (todoId: string) => {
     const { todos } = this.state;
 
-    const todo = this._findTodoById(todoId);
+    const todo = this.findTodoById(todoId);
     if (!todo) {
       return;
     }
@@ -86,8 +86,8 @@ class App extends React.Component<IProps, IState> {
     const newTodo = res.data;
 
     this.setState({
-      todos: todos.map(todo => {
-        return todo.id === todoId ? newTodo : todo;
+      todos: todos.map(todo2 => {
+        return todo2.id === todoId ? newTodo : todo2;
       })
     });
   };
@@ -123,12 +123,12 @@ class App extends React.Component<IProps, IState> {
     const { todos } = this.state;
 
     this.setState({
-      todos: todos.filter(todo => todo.id !== todoId)
+      todos: todos.filter((todo: ITodo) => todo.id !== todoId)
     });
   };
 
   onDeleteTodo = async (todoId: string) => {
-    const todo = this._findTodoById(todoId);
+    const todo = this.findTodoById(todoId);
     if (!todo) {
       return;
     }
@@ -154,7 +154,7 @@ class App extends React.Component<IProps, IState> {
     });
   };
 
-  _findTodoById = (todoId: string): ITodo => {
+  private findTodoById = (todoId: string): ITodo => {
     const { todos } = this.state;
     return todos.filter(todo => {
       return todo.id === todoId;
