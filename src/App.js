@@ -4,20 +4,32 @@ import { List } from '@material-ui/core';
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 
+import { axios } from './api';
 import GlobalDrawer from './components/GlobalDrawer/GlobalDrawer';
 import GlobalToolbar from './components/GlobalToolbar/GlobalToolbar';
 import TodoInput from './components/TodoInput/TodoInput';
 import TodoItem from './components/TodoItem/TodoItem';
-import { todos } from './fakeData';
 
 class App extends Component {
   state = {
     drawerOpened: false,
-    inputText: ''
+    inputText: '',
+    todos: []
   };
 
+  async componentDidMount() {
+    const res = await axios({
+      url: 'todos'
+    });
+    const todos = res.data;
+
+    this.setState({
+      todos
+    });
+  }
+
   render() {
-    const { drawerOpened, inputText } = this.state;
+    const { drawerOpened, inputText, todos } = this.state;
 
     return (
       <div className="App">
