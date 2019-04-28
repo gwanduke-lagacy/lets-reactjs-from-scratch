@@ -19,7 +19,7 @@
 - 테스트
   - [x] Jest/Enzyme (unit/integration test)
   - Nightwatch (e2e)
-  - CircleCI
+  - [x] CircleCI
 
 - 서버사이드 렌더링
   - Express.js
