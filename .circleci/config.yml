@@ -6,9 +6,5 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
-      - run:
-        name: Install Dependencies
-        command: yarn
-      - run:
-        name: run tests
-        command: yarn test
+      - run: yarn
+      - run: yarn test
