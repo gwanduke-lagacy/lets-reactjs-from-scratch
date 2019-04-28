@@ -7,10 +7,10 @@ jobs:
       - checkout # check out the code in the project directory
       - run: pwd
       - restore_cache:
-          key: yarn-cache-v1-{{ checksum "yarn.lock" }}
+          key: yarn-cache-v2-{{ checksum "yarn.lock" }}
       - run: yarn
       - save_cache:
-          key: yarn-cache-v1-{{ checksum "yarn.lock" }}
+          key: yarn-cache-v2-{{ checksum "yarn.lock" }}
           paths:
-            - ~/node_modules
+            - ~/project/node_modules
       - run: yarn test
